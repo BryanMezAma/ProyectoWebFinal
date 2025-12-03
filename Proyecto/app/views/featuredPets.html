@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Mis Favoritos - AdoptMe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            color: #e94560 !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #e94560 !important;
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, #e94560 0%, #c23a51 100%);
+            border: none;
+            padding: 8px 20px;
+            font-weight: 500;
+            border-radius: 8px;
+            color: white !important;
+        }
+
+        .main-container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: white;
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+
+        .page-header h1 i {
+            color: #ffc107;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .favorites-stats {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .favorites-stats h3 {
+            color: #ffc107;
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .favorites-stats p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0.5rem 0 0;
+        }
+
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .pet-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffc107;
+            box-shadow: 0 15px 30px rgba(255, 193, 7, 0.2);
+        }
+
+        .pet-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .pet-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .pet-card h5 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .pet-card .pet-info {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pet-card .pet-description {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .pet-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .pet-tag {
+            background: rgba(233, 69, 96, 0.2);
+            color: #e94560;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .pet-tag.species {
+            background: rgba(25, 135, 84, 0.2);
+            color: #28a745;
+        }
+
+        .pet-tag.favorite {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-details {
+            flex: 1;
+            background: linear-gradient(135deg, #e94560 0%, #c23a51 100%);
+            border: none;
+            padding: 10px;
+            font-weight: 500;
+            border-radius: 10px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .btn-details:hover {
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+            color: white;
+        }
+
+        .btn-remove {
+            width: 45px;
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            border-radius: 10px;
+            color: #dc3545;
+            transition: all 0.3s;
+        }
+
+        .btn-remove:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* Indicador de favorito */
+        .favorite-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #ffc107;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .favorite-badge i {
+            color: #1a1a2e;
+            font-size: 1.2rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .empty-state i {
+            font-size: 5rem;
+            color: #ffc107;
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-state h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state .btn {
+            margin-top: 1rem;
+        }
+
+        .btn-explore {
+            background: linear-gradient(135deg, #e94560 0%, #c23a51 100%);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 10px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .btn-explore:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+            color: white;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem;
+        }
+
+        .loading i {
+            font-size: 3rem;
+            color: #ffc107;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-user-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #e94560;
+            text-decoration: none;
+        }
+
+        /* Toast de notificación */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .toast-notification {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: slideIn 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .toast-notification.warning {
+            border-color: #ffc107;
+            background: rgba(255, 193, 7, 0.2);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Modal de detalles */
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-header .close {
+            color: white;
+        }
+
+        .modal-title {
+            color: white;
+        }
+
+        .modal-body {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .modal-body img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .detail-label {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .detail-value {
+            color: white;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand navbar-dark">
+        <a class="navbar-brand ml-3" href="home.html">
+            <i class="fas fa-paw mr-2"></i>AdoptMe
+        </a>
+        <div class="navbar-nav ml-auto mr-3" style="display: flex; align-items: center; gap: 1rem;">
+            <a class="nav-item nav-link" href="home.html">Inicio</a>
+            <a class="nav-item nav-link" href="adopterHome.html">Mascotas</a>
+            <a class="nav-item nav-link active" href="featuredPets.html">
+                <i class="fas fa-star mr-1"></i>Favoritos
+            </a>
+            
+            <div id="nav-not-logged">
+                <a class="btn btn-nav" href="login.html">
+                    <i class="fas fa-sign-in-alt mr-1"></i>Ingresar
+                </a>
+            </div>
+            
+            <div id="nav-logged" style="display: none;">
+                <a class="nav-user-btn" href="editProfile.html" id="nav-profile-link">
+                    <i class="fas fa-user-circle mr-1"></i>
+                    <span id="nav-user-name">Mi Perfil</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <a href="adopterHome.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Volver a todas las mascotas
+        </a>
+
+        <div class="page-header">
+            <h1><i class="fas fa-star mr-2"></i>Mis Favoritos</h1>
+            <p>Aquí puedes ver todas las mascotas que has marcado como favoritas</p>
+        </div>
+
+        <div class="favorites-stats" id="favorites-stats">
+            <h3 id="favorites-count">0</h3>
+            <p>mascotas en tu lista de favoritos</p>
+        </div>
+
+        <div id="loading" class="loading">
+            <i class="fas fa-spinner"></i>
+            <p style="color: rgba(255,255,255,0.5); margin-top: 1rem;">Cargando favoritos...</p>
+        </div>
+
+        <div class="pets-grid" id="pets-grid" style="display: none;"></div>
+
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <i class="far fa-star"></i>
+            <h3>No tienes favoritos aún</h3>
+            <p>Explora las mascotas disponibles y marca las que más te gusten con ⭐</p>
+            <a href="adopterHome.html" class="btn btn-explore">
+                <i class="fas fa-search mr-2"></i>Explorar Mascotas
+            </a>
+        </div>
+    </div>
+
+    <!-- Toast container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Modal de detalles -->
+    <div class="modal fade" id="petModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-pet-name"></h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img id="modal-pet-image" src="" alt="Mascota">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detail-row">
+                                <span class="detail-label">Especie</span>
+                                <span class="detail-value" id="modal-pet-species"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Raza</span>
+                                <span class="detail-value" id="modal-pet-breed"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Edad</span>
+                                <span class="detail-value" id="modal-pet-age"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Sexo</span>
+                                <span class="detail-value" id="modal-pet-sex"></span>
+                            </div>
+                            <div class="mt-3">
+                                <h6 style="color: white;">Descripción</h6>
+                                <p id="modal-pet-description" style="color: rgba(255,255,255,0.7);"></p>
+                            </div>
+                            <button class="btn btn-details mt-3" onclick="contactOwner()">
+                                <i class="fas fa-envelope mr-2"></i>Contactar para adoptar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = '/api';
+        let allPets = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            checkUserSession();
+            loadFavorites();
+        });
+
+        function checkUserSession() {
+            const userData = localStorage.getItem('userData');
+            const token = localStorage.getItem('token');
+
+            if (userData && token) {
+                const user = JSON.parse(userData);
+                document.getElementById('nav-not-logged').style.display = 'none';
+                document.getElementById('nav-logged').style.display = 'block';
+                document.getElementById('nav-user-name').textContent = user.name.split(' ')[0];
+            }
+        }
+
+        // Funciones de favoritos
+        function getFavorites() {
+            const favorites = localStorage.getItem('petFavorites');
+            return favorites ? JSON.parse(favorites) : [];
+        }
+
+        function saveFavorites(favorites) {
+            localStorage.setItem('petFavorites', JSON.stringify(favorites));
+        }
+
+        function removeFavorite(uuid, petName) {
+            let favorites = getFavorites();
+            favorites = favorites.filter(id => id !== uuid);
+            saveFavorites(favorites);
+            showToast(`${petName} eliminado de favoritos`, 'warning');
+            loadFavorites();
+        }
+
+        function showToast(message, type) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast-notification ${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-info-circle"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        async function loadFavorites() {
+            const favorites = getFavorites();
+            document.getElementById('favorites-count').textContent = favorites.length;
+
+            if (favorites.length === 0) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('pets-grid').style.display = 'none';
+                document.getElementById('empty-state').style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/pets`);
+                if (response.ok) {
+                    allPets = await response.json();
+                    // Filtrar solo las mascotas favoritas
+                    const favoritePets = allPets.filter(pet => favorites.includes(pet.uuid));
+                    displayPets(favoritePets);
+                } else {
+                    showEmptyState();
+                }
+            } catch (error) {
+                console.error('Error al cargar mascotas:', error);
+                showEmptyState();
+            }
+        }
+
+        function displayPets(pets) {
+            const loading = document.getElementById('loading');
+            const grid = document.getElementById('pets-grid');
+            const emptyState = document.getElementById('empty-state');
+
+            loading.style.display = 'none';
+
+            if (pets.length === 0) {
+                grid.style.display = 'none';
+                emptyState.style.display = 'block';
+                document.getElementById('favorites-count').textContent = '0';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            grid.style.display = 'grid';
+
+            grid.innerHTML = pets.map(pet => `
+                <div class="pet-card">
+                    <div class="favorite-badge">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <img src="${pet.imageurl}" alt="${pet.name}" 
+                         onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&q=80'">
+                    <div class="card-body">
+                        <h5>${pet.name}</h5>
+                        <div class="pet-tags">
+                            <span class="pet-tag species">${pet.species}</span>
+                            <span class="pet-tag">${pet.sex === 'M' ? 'Macho' : 'Hembra'}</span>
+                            <span class="pet-tag">${pet.age} año${pet.age !== 1 ? 's' : ''}</span>
+                            <span class="pet-tag favorite"><i class="fas fa-star mr-1"></i>Favorito</span>
+                        </div>
+                        <p class="pet-info"><i class="fas fa-dog mr-1"></i>${pet.breed}</p>
+                        <p class="pet-description">${pet.description}</p>
+                        <div class="card-actions">
+                            <button class="btn btn-details" onclick='showPetDetails(${JSON.stringify(pet).replace(/'/g, "\\'")})'>
+                                <i class="fas fa-eye mr-2"></i>Ver detalles
+                            </button>
+                            <button class="btn btn-remove" onclick="removeFavorite('${pet.uuid}', '${pet.name}')" title="Quitar de favoritos">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showPetDetails(pet) {
+            document.getElementById('modal-pet-name').textContent = pet.name;
+            document.getElementById('modal-pet-image').src = pet.imageurl;
+            document.getElementById('modal-pet-species').textContent = pet.species;
+            document.getElementById('modal-pet-breed').textContent = pet.breed;
+            document.getElementById('modal-pet-age').textContent = `${pet.age} año${pet.age !== 1 ? 's' : ''}`;
+            document.getElementById('modal-pet-sex').textContent = pet.sex === 'M' ? 'Macho' : 'Hembra';
+            document.getElementById('modal-pet-description').textContent = pet.description;
+
+            $('#petModal').modal('show');
+        }
+
+        function showEmptyState() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('pets-grid').style.display = 'none';
+            document.getElementById('empty-state').style.display = 'block';
+        }
+
+        function contactOwner() {
+            const userData = localStorage.getItem('userData');
+            if (!userData) {
+                alert('Debes iniciar sesión para contactar al dueño');
+                window.location.href = 'login.html';
+                return;
+            }
+            alert('¡Gracias por tu interés! El dueño será notificado y se pondrá en contacto contigo pronto.');
+            $('#petModal').modal('hide');
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

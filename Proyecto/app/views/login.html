@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdoptMe - Iniciar Sesión</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            color: #e94560 !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #e94560 !important;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 5px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            background: #e94560;
+            color: white;
+        }
+
+        .auth-tab:hover:not(.active) {
+            color: white;
+        }
+
+        .form-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #e94560;
+            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.2);
+            color: white;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #e94560 0%, #c23a51 100%);
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            border-radius: 10px;
+            width: 100%;
+            color: white;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+        }
+
+        .role-select {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .role-option {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .role-option:hover {
+            border-color: rgba(233, 69, 96, 0.5);
+        }
+
+        .role-option.selected {
+            border-color: #e94560;
+            background: rgba(233, 69, 96, 0.1);
+        }
+
+        .role-option i {
+            font-size: 2rem;
+            color: #e94560;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .role-option span {
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .role-option input {
+            display: none;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .alert {
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group-password {
+            position: relative;
+        }
+
+        .user-info-banner {
+            background: rgba(233, 69, 96, 0.2);
+            border: 1px solid #e94560;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .user-info-banner h5 {
+            color: white;
+            margin: 0;
+        }
+
+        .user-info-banner p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0.5rem 0 0;
+            font-size: 0.9rem;
+        }
+
+        .logged-in-actions {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .btn-secondary-custom {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            font-weight: 500;
+            border-radius: 10px;
+            width: 100%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary-custom:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+
+        .btn-danger-custom {
+            background: transparent;
+            border: 2px solid #e94560;
+            padding: 12px;
+            font-weight: 500;
+            border-radius: 10px;
+            width: 100%;
+            color: #e94560;
+            transition: all 0.3s;
+        }
+
+        .btn-danger-custom:hover {
+            background: #e94560;
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-form.active {
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand navbar-dark">
+        <a class="navbar-brand ml-3" href="home.html">
+            <i class="fas fa-paw mr-2"></i>AdoptMe
+        </a>
+        <div class="navbar-nav ml-auto mr-3">
+            <a class="nav-item nav-link" href="home.html">Inicio</a>
+            <a class="nav-item nav-link" href="adopterHome.html">Mascotas</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="auth-container">
+            <!-- Estado no logueado -->
+            <div id="not-logged-in">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="showForm('login')">Iniciar Sesión</button>
+                    <button class="auth-tab" onclick="showForm('register')">Registrarse</button>
+                </div>
+
+                <div id="alert-container"></div>
+
+                <!-- Formulario de Login -->
+                <form id="login-form" class="auth-form active">
+                    <h2 class="form-title">Bienvenido de vuelta</h2>
+                    <p class="form-subtitle">Ingresa tus credenciales para continuar</p>
+
+                    <div class="form-group">
+                        <label for="login-email">Correo electrónico</label>
+                        <input type="email" class="form-control" id="login-email" placeholder="ejemplo@correo.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Contraseña</label>
+                        <div class="input-group-password">
+                            <input type="password" class="form-control" id="login-password" placeholder="Tu contraseña" required>
+                            <i class="fas fa-eye password-toggle" onclick="togglePassword('login-password', this)"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-custom">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Iniciar Sesión
+                    </button>
+                </form>
+
+                <!-- Formulario de Registro -->
+                <form id="register-form" class="auth-form">
+                    <h2 class="form-title">Crear cuenta</h2>
+                    <p class="form-subtitle">Únete a nuestra comunidad de adopción</p>
+
+                    <div class="form-group">
+                        <label>¿Qué deseas hacer?</label>
+                        <div class="role-select">
+                            <label class="role-option" onclick="selectRole('ADOPTER')">
+                                <input type="radio" name="role" value="ADOPTER">
+                                <i class="fas fa-heart"></i>
+                                <span>Adoptar</span>
+                            </label>
+                            <label class="role-option" onclick="selectRole('PET_OWNER')">
+                                <input type="radio" name="role" value="PET_OWNER">
+                                <i class="fas fa-hand-holding-heart"></i>
+                                <span>Dar en adopción</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-name">Nombre completo</label>
+                        <input type="text" class="form-control" id="register-name" placeholder="Tu nombre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-email">Correo electrónico</label>
+                        <input type="email" class="form-control" id="register-email" placeholder="ejemplo@correo.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-phone">Teléfono</label>
+                        <input type="tel" class="form-control" id="register-phone" placeholder="Tu número de teléfono" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-password">Contraseña</label>
+                        <div class="input-group-password">
+                            <input type="password" class="form-control" id="register-password" placeholder="Crea una contraseña" required>
+                            <i class="fas fa-eye password-toggle" onclick="togglePassword('register-password', this)"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-confirm-password">Confirmar contraseña</label>
+                        <div class="input-group-password">
+                            <input type="password" class="form-control" id="register-confirm-password" placeholder="Confirma tu contraseña" required>
+                            <i class="fas fa-eye password-toggle" onclick="togglePassword('register-confirm-password', this)"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-custom">
+                        <i class="fas fa-user-plus mr-2"></i>Crear cuenta
+                    </button>
+                </form>
+            </div>
+
+            <!-- Estado logueado -->
+            <div id="logged-in" style="display: none;">
+                <div class="user-info-banner">
+                    <h5><i class="fas fa-user-circle mr-2"></i><span id="user-name"></span></h5>
+                    <p><span id="user-email"></span></p>
+                    <p><span id="user-role-display"></span></p>
+                </div>
+
+                <div class="logged-in-actions">
+                    <a href="editProfile.html" class="btn btn-secondary-custom">
+                        <i class="fas fa-user-edit mr-2"></i>Editar Perfil
+                    </a>
+                    <a href="adopterHome.html" class="btn btn-secondary-custom" id="btn-explore">
+                        <i class="fas fa-search mr-2"></i>Explorar Mascotas
+                    </a>
+                    <a href="registerPet.html" class="btn btn-secondary-custom" id="btn-register-pet" style="display: none;">
+                        <i class="fas fa-plus-circle mr-2"></i>Registrar Mascota
+                    </a>
+                    <button onclick="logout()" class="btn btn-danger-custom">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = '/api';
+
+        // Verificar sesión al cargar
+        document.addEventListener('DOMContentLoaded', checkSession);
+
+        function checkSession() {
+            const userData = localStorage.getItem('userData');
+            const token = localStorage.getItem('token');
+
+            if (userData && token) {
+                const user = JSON.parse(userData);
+                showLoggedInState(user);
+            }
+        }
+
+        function showLoggedInState(user) {
+            document.getElementById('not-logged-in').style.display = 'none';
+            document.getElementById('logged-in').style.display = 'block';
+            document.getElementById('user-name').textContent = user.name;
+            document.getElementById('user-email').textContent = user.email;
+            document.getElementById('user-role-display').textContent = 
+                user.role === 'ADOPTER' ? '🏠 Adoptante' : '🐾 Dueño de mascotas';
+
+            // Mostrar botón de registrar mascota solo para PET_OWNER
+            if (user.role === 'PET_OWNER') {
+                document.getElementById('btn-register-pet').style.display = 'block';
+            }
+        }
+
+        function showForm(formType) {
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            forms.forEach(form => form.classList.remove('active'));
+
+            if (formType === 'login') {
+                tabs[0].classList.add('active');
+                document.getElementById('login-form').classList.add('active');
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('register-form').classList.add('active');
+            }
+        }
+
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        function selectRole(role) {
+            document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('selected'));
+            const selectedOption = document.querySelector(`input[value="${role}"]`);
+            selectedOption.checked = true;
+            selectedOption.closest('.role-option').classList.add('selected');
+        }
+
+        function showAlert(message, type) {
+            const container = document.getElementById('alert-container');
+            container.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                    </button>
+                </div>
+            `;
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        // Login
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const response = await fetch(`${API_URL}/users/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.ok) {
+                    const token = await response.text();
+                    localStorage.setItem('token', token);
+
+                    // Obtener datos del usuario
+                    const userResponse = await fetch(`${API_URL}/users/${email}`, {
+                        headers: {
+                            'x-auth': token
+                        }
+                    });
+
+                    if (userResponse.ok) {
+                        const userData = await userResponse.json();
+                        const user = userData[0];
+                        localStorage.setItem('userData', JSON.stringify(user));
+                        showAlert('¡Inicio de sesión exitoso!', 'success');
+                        setTimeout(() => showLoggedInState(user), 1000);
+                    }
+                } else {
+                    showAlert('Correo o contraseña incorrectos', 'danger');
+                }
+            } catch (error) {
+                showAlert('Error al conectar con el servidor', 'danger');
+                console.error(error);
+            }
+        });
+
+        // Registro
+        document.getElementById('register-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const role = document.querySelector('input[name="role"]:checked');
+            if (!role) {
+                showAlert('Selecciona si deseas adoptar o dar en adopción', 'warning');
+                return;
+            }
+
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+
+            if (password !== confirmPassword) {
+                showAlert('Las contraseñas no coinciden', 'warning');
+                return;
+            }
+
+            const userData = {
+                name: document.getElementById('register-name').value,
+                email: document.getElementById('register-email').value,
+                phone: document.getElementById('register-phone').value,
+                password: password,
+                role: role.value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/users`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+
+                if (response.ok) {
+                    showAlert('¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.', 'success');
+                    setTimeout(() => showForm('login'), 2000);
+                    document.getElementById('register-form').reset();
+                    document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('selected'));
+                } else {
+                    const error = await response.json();
+                    showAlert(error.error || 'Error al crear la cuenta', 'danger');
+                }
+            } catch (error) {
+                showAlert('Error al conectar con el servidor', 'danger');
+                console.error(error);
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userData');
+            document.getElementById('logged-in').style.display = 'none';
+            document.getElementById('not-logged-in').style.display = 'block';
+            showAlert('Has cerrado sesión correctamente', 'info');
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+

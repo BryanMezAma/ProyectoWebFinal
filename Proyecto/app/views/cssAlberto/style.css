@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+.navbar {
+    font-size: large;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cards {
+    margin-top: 4em;
+    display: flex;
+    gap: 4em;
+}
+
+.cards .card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.cards .card img.card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.cards .card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.cards .card-body button {
+    margin-top: auto;
+}
+
+.edit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgray;
+    margin-top: 3em;
+    width: 50%;
+    padding: 2em;
+}
+
+.input-group {
+    width: 80%;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group label {
+    text-align: left;
+    width: 80%;
+}
+
+#buttonRegister {
+    width: 80%;
+}
+
+.buttons {
+    display: flex;
+    gap: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border: 2px solid #333;
+    border-radius: 15%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-picture i.fa-user {
+    font-size: 4rem;
+    color: #555;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 40%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.edit-icon:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.pets-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.pet-card img.card-img-top {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.pet-card .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.pet-card .card-body button {
+    margin-top: auto;
+}

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Mascota - AdoptMe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            color: #e94560 !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #e94560 !important;
+        }
+
+        .main-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+
+        .page-title p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card-custom {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+        }
+
+        .card-title {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title i {
+            color: #e94560;
+        }
+
+        .form-group label {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #e94560;
+            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.2);
+            color: white;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+        }
+
+        select.form-control option {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #e94560 0%, #c23a51 100%);
+            border: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            border-radius: 10px;
+            color: white;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+            color: white;
+        }
+
+        .pets-list {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .pet-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .pet-card:hover {
+            border-color: #e94560;
+            transform: translateX(5px);
+        }
+
+        .pet-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .pet-info {
+            flex: 1;
+        }
+
+        .pet-info h5 {
+            color: white;
+            margin: 0 0 0.25rem;
+            font-weight: 600;
+        }
+
+        .pet-info p {
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .badge {
+            font-weight: 500;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .badge-warning {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .badge-success {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+
+        .pet-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .pet-actions .btn {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #e94560;
+        }
+
+        .image-preview {
+            width: 100%;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .image-preview i {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Scrollbar personalizado */
+        .pets-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .pets-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .pets-list::-webkit-scrollbar-thumb {
+            background: #e94560;
+            border-radius: 4px;
+        }
+
+        .alert {
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand navbar-dark">
+        <a class="navbar-brand ml-3" href="home.html">
+            <i class="fas fa-paw mr-2"></i>AdoptMe
+        </a>
+        <div class="navbar-nav ml-auto mr-3">
+            <a class="nav-item nav-link" href="home.html">Inicio</a>
+            <a class="nav-item nav-link" href="adopterHome.html">Mascotas</a>
+            <a class="nav-item nav-link" href="editProfile.html">Mi Perfil</a>
+            <a class="nav-item nav-link" href="login.html">
+                <i class="fas fa-user-circle"></i>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-title">
+            <h1><i class="fas fa-plus-circle mr-2"></i>Registrar Mascota</h1>
+            <p>Agrega una nueva mascota para encontrarle un hogar</p>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <div class="content-grid">
+            <!-- Formulario de registro -->
+            <div class="card-custom">
+                <h3 class="card-title">
+                    <i class="fas fa-edit"></i>
+                    Datos de la Mascota
+                </h3>
+
+                <form id="form-mascota">
+                    <div class="image-preview" id="imagePreview">
+                        <i class="fas fa-image"></i>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagen">URL de la imagen</label>
+                        <input type="url" class="form-control" id="imagen" 
+                               placeholder="https://ejemplo.com/imagen.jpg"
+                               oninput="previewImage(this.value)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre de la mascota *</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="especie">Especie *</label>
+                                <select class="form-control" id="especie" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="Perro">Perro</option>
+                                    <option value="Gato">Gato</option>
+                                    <option value="Ave">Ave</option>
+                                    <option value="Conejo">Conejo</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sexo">Sexo *</label>
+                                <select class="form-control" id="sexo" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="M">Macho</option>
+                                    <option value="F">Hembra</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="edad">Edad (años) *</label>
+                                <input type="number" class="form-control" id="edad" placeholder="Edad" min="0" max="30" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="raza">Raza *</label>
+                                <input type="text" class="form-control" id="raza" placeholder="Raza" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">Descripción *</label>
+                        <textarea class="form-control" id="descripcion" 
+                                  placeholder="Describe la personalidad, hábitos y cualquier información relevante de tu mascota..."
+                                  required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-custom">
+                        <i class="fas fa-save mr-2"></i>Registrar Mascota
+                    </button>
+                </form>
+            </div>
+
+            <!-- Lista de mascotas del usuario -->
+            <div class="card-custom">
+                <h3 class="card-title">
+                    <i class="fas fa-list"></i>
+                    Mis Mascotas
+                </h3>
+
+                <div class="pets-list" id="mis-mascotas">
+                    <div class="empty-state">
+                        <i class="fas fa-paw"></i>
+                        <p>No tienes mascotas registradas aún</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = '/api';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar sesión
+            const token = localStorage.getItem('token');
+            const userData = localStorage.getItem('userData');
+
+            if (!token || !userData) {
+                showAlert('Debes iniciar sesión para registrar mascotas', 'warning');
+                setTimeout(() => window.location.href = 'login.html', 2000);
+                return;
+            }
+
+            const user = JSON.parse(userData);
+
+            if (user.role !== 'PET_OWNER') {
+                showAlert('Solo los dueños pueden registrar mascotas', 'warning');
+                setTimeout(() => window.location.href = 'home.html', 2000);
+                return;
+            }
+
+            // Configurar formulario
+            document.getElementById('form-mascota').addEventListener('submit', registerPet);
+
+            // Cargar mascotas
+            loadUserPets(user._id);
+        });
+
+        function previewImage(url) {
+            const preview = document.getElementById('imagePreview');
+            if (url) {
+                preview.innerHTML = `<img src="${url}" onerror="this.parentElement.innerHTML='<i class=\\'fas fa-image\\'></i>'">`;
+            } else {
+                preview.innerHTML = '<i class="fas fa-image"></i>';
+            }
+        }
+
+        function showAlert(message, type) {
+            const container = document.getElementById('alert-container');
+            container.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        async function registerPet(e) {
+            e.preventDefault();
+
+            const token = localStorage.getItem('token');
+            const userData = JSON.parse(localStorage.getItem('userData'));
+
+            const petData = {
+                name: document.getElementById('nombre').value,
+                age: parseInt(document.getElementById('edad').value),
+                breed: document.getElementById('raza').value,
+                description: document.getElementById('descripcion').value,
+                species: document.getElementById('especie').value,
+                sex: document.getElementById('sexo').value,
+                imageurl: document.getElementById('imagen').value || 'https://via.placeholder.com/300x200?text=Mascota',
+                owner: userData._id
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/pets`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(petData)
+                });
+
+                if (response.ok) {
+                    const savedPet = await response.json();
+                    showAlert(`¡${savedPet.name} ha sido registrado exitosamente!`, 'success');
+                    document.getElementById('form-mascota').reset();
+                    document.getElementById('imagePreview').innerHTML = '<i class="fas fa-image"></i>';
+                    loadUserPets(userData._id);
+                } else {
+                    const errorText = await response.text();
+                    showAlert('Error al registrar: ' + errorText, 'danger');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('Error al conectar con el servidor', 'danger');
+            }
+        }
+
+        async function loadUserPets(ownerId) {
+            const container = document.getElementById('mis-mascotas');
+
+            try {
+                const response = await fetch(`${API_URL}/pets`);
+                if (response.ok) {
+                    const pets = await response.json();
+                    const userPets = pets.filter(pet => pet.owner === ownerId);
+
+                    if (userPets.length === 0) {
+                        container.innerHTML = `
+                            <div class="empty-state">
+                                <i class="fas fa-paw"></i>
+                                <p>No tienes mascotas registradas aún</p>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    container.innerHTML = userPets.map(pet => `
+                        <div class="pet-card">
+                            <img src="${pet.imageurl}" alt="${pet.name}" 
+                                 onerror="this.src='https://via.placeholder.com/80?text=🐾'">
+                            <div class="pet-info">
+                                <h5>${pet.name}</h5>
+                                <p>${pet.species} - ${pet.breed} - ${pet.age} año(s)</p>
+                                <span class="badge ${pet.isAdopted ? 'badge-success' : 'badge-warning'}">
+                                    ${pet.isAdopted ? 'Adoptado' : 'Disponible'}
+                                </span>
+                            </div>
+                            <div class="pet-actions">
+                                <button class="btn btn-outline-danger" onclick="deletePet('${pet.uuid}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function deletePet(uuid) {
+            if (!confirm('¿Estás seguro de eliminar esta mascota?')) return;
+
+            try {
+                const response = await fetch(`${API_URL}/pets/${uuid}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    showAlert('Mascota eliminada correctamente', 'success');
+                    const userData = JSON.parse(localStorage.getItem('userData'));
+                    loadUserPets(userData._id);
+                } else {
+                    showAlert('Error al eliminar la mascota', 'danger');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('Error al conectar con el servidor', 'danger');
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

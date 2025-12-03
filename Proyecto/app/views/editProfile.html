@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Editar Perfil - AdoptMe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            color: #e94560 !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #e94560 !important;
+        }
+
+        .main-container {
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h1 {
+            font-weight: 700;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e94560 0%, #c23a51 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-avatar i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .profile-email {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .profile-role {
+            display: inline-block;
+            background: rgba(233, 69, 96, 0.2);
+            color: #e94560;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .form-group label {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #e94560;
+            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.2);
+            color: white;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+        }
+
+        select.form-control option {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn-group-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-save {
+            flex: 2;
+            background: linear-gradient(135deg, #e94560 0%, #c23a51 100%);
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            border-radius: 10px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+            color: white;
+        }
+
+        .btn-cancel {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            font-weight: 500;
+            border-radius: 10px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+
+        .btn-logout {
+            display: block;
+            width: 100%;
+            background: transparent;
+            border: 2px solid #dc3545;
+            padding: 12px;
+            font-weight: 500;
+            border-radius: 10px;
+            color: #dc3545;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-logout:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        .alert {
+            border-radius: 10px;
+        }
+
+        .section-divider {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+            padding-top: 1.5rem;
+        }
+
+        .section-title {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title i {
+            color: #e94560;
+            margin-right: 0.5rem;
+        }
+
+        .adopter-fields, .owner-fields {
+            display: none;
+        }
+
+        .row {
+            margin-left: -0.5rem;
+            margin-right: -0.5rem;
+        }
+
+        .row > div {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand navbar-dark">
+        <a class="navbar-brand ml-3" href="home.html">
+            <i class="fas fa-paw mr-2"></i>AdoptMe
+        </a>
+        <div class="navbar-nav ml-auto mr-3">
+            <a class="nav-item nav-link" href="home.html">Inicio</a>
+            <a class="nav-item nav-link" href="adopterHome.html">Mascotas</a>
+            <a class="nav-item nav-link active" href="editProfile.html">Mi Perfil</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-title">
+            <h1><i class="fas fa-user-edit mr-2"></i>Editar Perfil</h1>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <p class="profile-email" id="emailDisplay"></p>
+                <span class="profile-role" id="roleDisplay"></span>
+            </div>
+
+            <form id="profile-form">
+                <!-- Campos básicos -->
+                <div class="form-group">
+                    <label for="nameEdit"><i class="fas fa-user mr-1"></i>Nombre completo</label>
+                    <input type="text" class="form-control" id="nameEdit" placeholder="Tu nombre completo" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="phoneEdit"><i class="fas fa-phone mr-1"></i>Teléfono</label>
+                            <input type="tel" class="form-control" id="phoneEdit" placeholder="Tu número de teléfono">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="addressEdit"><i class="fas fa-map-marker-alt mr-1"></i>Dirección</label>
+                            <input type="text" class="form-control" id="addressEdit" placeholder="Tu dirección">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campos para ADOPTANTES -->
+                <div class="adopter-fields" id="adopter-fields">
+                    <div class="section-divider">
+                        <h5 class="section-title"><i class="fas fa-heart"></i>Preferencias de Adopción</h5>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ageEdit">Edad</label>
+                                <input type="number" class="form-control" id="ageEdit" placeholder="Tu edad" min="18" max="100">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="hasPetsEdit">¿Tienes mascotas?</label>
+                                <select class="form-control" id="hasPetsEdit">
+                                    <option value="">Seleccionar...</option>
+                                    <option value="si">Sí</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="petPreferencesEdit">Tipo de mascota preferida</label>
+                                <select class="form-control" id="petPreferencesEdit">
+                                    <option value="">Seleccionar...</option>
+                                    <option value="perro">Perro</option>
+                                    <option value="gato">Gato</option>
+                                    <option value="ambos">Ambos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sizePreferencesEdit">Tamaño preferido</label>
+                                <select class="form-control" id="sizePreferencesEdit">
+                                    <option value="">Seleccionar...</option>
+                                    <option value="pequeno">Pequeño</option>
+                                    <option value="mediano">Mediano</option>
+                                    <option value="grande">Grande</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campo de comentarios para todos -->
+                <div class="form-group">
+                    <label for="commentsEdit"><i class="fas fa-comment mr-1"></i>Comentarios adicionales</label>
+                    <textarea class="form-control" id="commentsEdit" placeholder="Cuéntanos más sobre ti..."></textarea>
+                </div>
+
+                <div class="btn-group-actions">
+                    <button type="submit" class="btn btn-save">
+                        <i class="fas fa-save mr-2"></i>Guardar Cambios
+                    </button>
+                    <a href="home.html" class="btn btn-cancel">
+                        <i class="fas fa-times mr-2"></i>Cancelar
+                    </a>
+                </div>
+
+                <button type="button" class="btn btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Cerrar Sesión
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = '/api';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar sesión
+            const token = localStorage.getItem('token');
+            const userData = localStorage.getItem('userData');
+
+            if (!token || !userData) {
+                showAlert('Debes iniciar sesión para editar tu perfil', 'warning');
+                setTimeout(() => window.location.href = 'login.html', 2000);
+                return;
+            }
+
+            const user = JSON.parse(userData);
+            loadUserData(user);
+
+            // Configurar formulario
+            document.getElementById('profile-form').addEventListener('submit', saveChanges);
+        });
+
+        function loadUserData(user) {
+            // Mostrar email y rol
+            document.getElementById('emailDisplay').textContent = user.email;
+            document.getElementById('roleDisplay').textContent = 
+                user.role === 'ADOPTER' ? '🏠 Adoptante' : '🐾 Dueño de Mascotas';
+
+            // Cargar campos básicos
+            document.getElementById('nameEdit').value = user.name || '';
+            document.getElementById('phoneEdit').value = user.phone || '';
+            document.getElementById('addressEdit').value = user.address || '';
+            document.getElementById('commentsEdit').value = user.comments || '';
+
+            // Mostrar campos según rol
+            if (user.role === 'ADOPTER') {
+                document.getElementById('adopter-fields').style.display = 'block';
+                
+                document.getElementById('ageEdit').value = user.age || '';
+                document.getElementById('hasPetsEdit').value = user.hasPets || '';
+                document.getElementById('petPreferencesEdit').value = user.petPreferences || '';
+                document.getElementById('sizePreferencesEdit').value = user.sizePreferences || '';
+            }
+        }
+
+        function showAlert(message, type) {
+            const container = document.getElementById('alert-container');
+            container.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        async function saveChanges(e) {
+            e.preventDefault();
+
+            const token = localStorage.getItem('token');
+            const userData = JSON.parse(localStorage.getItem('userData'));
+
+            const updates = {
+                name: document.getElementById('nameEdit').value,
+                phone: document.getElementById('phoneEdit').value,
+                address: document.getElementById('addressEdit').value,
+                comments: document.getElementById('commentsEdit').value
+            };
+
+            // Campos adicionales para adoptantes
+            if (userData.role === 'ADOPTER') {
+                const age = document.getElementById('ageEdit').value;
+                if (age) updates.age = parseInt(age);
+                
+                const hasPets = document.getElementById('hasPetsEdit').value;
+                if (hasPets) updates.hasPets = hasPets;
+                
+                const petPreferences = document.getElementById('petPreferencesEdit').value;
+                if (petPreferences) updates.petPreferences = petPreferences;
+                
+                const sizePreferences = document.getElementById('sizePreferencesEdit').value;
+                if (sizePreferences) updates.sizePreferences = sizePreferences;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/users/${userData.email}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-auth': token
+                    },
+                    body: JSON.stringify(updates)
+                });
+
+                if (response.ok) {
+                    // Actualizar localStorage
+                    const updatedUser = { ...userData, ...updates };
+                    localStorage.setItem('userData', JSON.stringify(updatedUser));
+                    
+                    showAlert('¡Perfil actualizado correctamente!', 'success');
+                    setTimeout(() => window.location.href = 'home.html', 1500);
+                } else {
+                    const errorText = await response.text();
+                    showAlert('Error al actualizar: ' + errorText, 'danger');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('Error al conectar con el servidor', 'danger');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userData');
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

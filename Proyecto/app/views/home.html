@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>AdoptMe - Encuentra tu compañero perfecto</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            color: #e94560 !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem !important;
+        }
+
+        .nav-link:hover {
+            color: #e94560 !important;
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, #e94560 0%, #c23a51 100%);
+            border: none;
+            padding: 8px 20px;
+            font-weight: 500;
+            border-radius: 8px;
+            color: white !important;
+            transition: all 0.3s;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        }
+
+        .hero-section {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-title {
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title span {
+            color: #e94560;
+        }
+
+        .hero-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.4s;
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            border-color: #e94560;
+            box-shadow: 0 20px 40px rgba(233, 69, 96, 0.2);
+        }
+
+        .option-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .option-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .option-card h4 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-card p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-option {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-adopt {
+            background: linear-gradient(135deg, #e94560 0%, #c23a51 100%);
+            color: white;
+        }
+
+        .btn-give {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            border: 2px solid #e94560;
+            color: white;
+        }
+
+        .btn-option:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+        }
+
+        .user-welcome {
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .user-welcome.show {
+            display: block;
+        }
+
+        .user-welcome h5 {
+            color: white;
+            margin: 0;
+        }
+
+        .user-welcome p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0.5rem 0 0;
+        }
+
+        .features-section {
+            padding: 3rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: #e94560;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h5 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .nav-user-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-user-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: white !important;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-user-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand navbar-dark">
+        <a class="navbar-brand ml-3" href="home.html">
+            <i class="fas fa-paw mr-2"></i>AdoptMe
+        </a>
+        <div class="navbar-nav ml-auto mr-3 nav-user-section">
+            <a class="nav-item nav-link" href="adopterHome.html">Mascotas</a>
+            <a class="nav-item nav-link" href="featuredPets.html">Destacados</a>
+            
+            <!-- Mostrar cuando NO está logueado -->
+            <div id="nav-not-logged">
+                <a class="btn btn-nav" href="login.html">
+                    <i class="fas fa-sign-in-alt mr-1"></i>Ingresar
+                </a>
+            </div>
+            
+            <!-- Mostrar cuando SÍ está logueado -->
+            <div id="nav-logged" style="display: none;">
+                <a class="nav-user-btn" href="editProfile.html" id="nav-profile-link">
+                    <i class="fas fa-user-circle mr-1"></i>
+                    <span id="nav-user-name">Mi Perfil</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <div class="user-welcome" id="user-welcome">
+            <h5>¡Hola, <span id="welcome-name"></span>! 👋</h5>
+            <p id="welcome-role"></p>
+        </div>
+
+        <h1 class="hero-title">Encuentra tu <span>compañero</span> perfecto</h1>
+        <p class="hero-subtitle">
+            Conectamos mascotas que necesitan un hogar con personas dispuestas a darles amor y cuidado
+        </p>
+    </div>
+
+    <div class="cards-container">
+        <div class="option-card">
+            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&q=80" alt="Adoptar mascota">
+            <div class="card-body">
+                <h4><i class="fas fa-heart mr-2" style="color: #e94560;"></i>Quiero Adoptar</h4>
+                <p>Dale un hogar a un nuevo amigo. Miles de mascotas esperan por ti.</p>
+                <button class="btn-option btn-adopt" onclick="goToAdopt()">
+                    Buscar Mascotas
+                </button>
+            </div>
+        </div>
+
+        <div class="option-card">
+            <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=500&q=80" alt="Dar en adopción">
+            <div class="card-body">
+                <h4><i class="fas fa-hand-holding-heart mr-2" style="color: #e94560;"></i>Dar en Adopción</h4>
+                <p>Ayuda a tu mascota a encontrar una nueva familia que la ame.</p>
+                <button class="btn-option btn-give" onclick="goToGive()">
+                    Registrar Mascota
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="features-section">
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <h5>Seguro</h5>
+                <p>Verificamos a todos los usuarios para garantizar adopciones responsables</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-bolt"></i>
+                <h5>Rápido</h5>
+                <p>Proceso de adopción simplificado para conectarte con tu mascota ideal</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-heart"></i>
+                <h5>Con Amor</h5>
+                <p>Cada mascota merece un hogar lleno de amor y cuidados</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkUserSession();
+        });
+
+        function checkUserSession() {
+            const userData = localStorage.getItem('userData');
+            const token = localStorage.getItem('token');
+
+            if (userData && token) {
+                const user = JSON.parse(userData);
+                
+                // Mostrar navegación de usuario logueado
+                document.getElementById('nav-not-logged').style.display = 'none';
+                document.getElementById('nav-logged').style.display = 'block';
+                document.getElementById('nav-user-name').textContent = user.name.split(' ')[0];
+                
+                // Mostrar bienvenida
+                const welcomeEl = document.getElementById('user-welcome');
+                welcomeEl.classList.add('show');
+                document.getElementById('welcome-name').textContent = user.name;
+                document.getElementById('welcome-role').textContent = 
+                    user.role === 'ADOPTER' ? '🏠 Estás buscando adoptar' : '🐾 Tienes mascotas para dar en adopción';
+            }
+        }
+
+        function goToAdopt() {
+            const userData = localStorage.getItem('userData');
+            if (!userData) {
+                window.location.href = 'login.html';
+            } else {
+                window.location.href = 'adopterHome.html';
+            }
+        }
+
+        function goToGive() {
+            const userData = localStorage.getItem('userData');
+            if (!userData) {
+                window.location.href = 'login.html';
+            } else {
+                const user = JSON.parse(userData);
+                if (user.role === 'PET_OWNER') {
+                    window.location.href = 'registerPet.html';
+                } else {
+                    alert('Para registrar mascotas necesitas una cuenta de dueño. Puedes crear una nueva cuenta.');
+                    window.location.href = 'login.html';
+                }
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

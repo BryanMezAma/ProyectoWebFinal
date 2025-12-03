@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <title>Registro de adoptador</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="./cssDiego/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-light shadow-sm justify-content-between">
+        <div class="nav navbar-nav align-items-center ml-3">
+            <a class="nav-item nav-link active" href="home.html">AdoptMe <span class="sr-only">(current)</span></a>
+        </div>
+        <div class="nav navbar-nav align-items-center mr-3 g-3">
+            <a class="nav-item nav-link mr-3" href="adopterHome.html">Home</a>
+            <a class="nav-item nav-link mr-3" href="featuredPets.html">Mascotas destacadas</a>
+           
+            <a class="nav-item nav-link ml-auto" href="#">
+                <button type="button" class="btn btn-secondary" data-toggle="button"
+                        aria-pressed="false" autocomplete="off">Login</button>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="title mt-5">
+            <h1>Registro de adoptador</h1>
+        </div>
+
+        <div class="form-group register-container ml-4 mr-4 mt-4 shadow-lg">
+            <label for="emailRegisterAdopter">Email:</label>
+            <input type="email" name="emailRegisterAdopter" id="emailRegisterAdopter"
+                   class="form-control" placeholder="example@email.com">
+
+            <label for="passwordRegisterAdopter" class="mt-3">Contraseña:</label>
+            <input type="password" name="passwordRegisterAdopter" id="passwordRegisterAdopter"
+                   class="form-control" placeholder="Contraseña">
+
+            <label for="confirmPasswordRegisterAdopter" class="mt-3">Confirmar contraseña:</label>
+            <input type="password" name="confirmPasswordRegisterAdopter"
+                   id="confirmPasswordRegisterAdopter" class="form-control"
+                   placeholder="Confirmar contraseña">
+
+            <label for="nameRegisterAdopter" class="mt-3">Nombre completo:</label>
+            <input type="text" name="nameRegisterAdopter" id="nameRegisterAdopter"
+                   class="form-control" placeholder="Nombre completo">
+
+            <label for="addressRegisterAdopter" class="mt-3">Domicilio:</label>
+            <input type="text" name="addressRegisterAdopter" id="addressRegisterAdopter"
+                   class="form-control" placeholder="Ciudad, colonia y calle">
+
+            <label for="phoneRegisterAdopter" class="mt-3">Teléfono:</label>
+            <input type="text" name="phoneRegisterAdopter" id="phoneRegisterAdopter"
+                   class="form-control" placeholder="Número de teléfono">
+
+            <label for="ageRegisterAdopter" class="mt-3">Edad:</label>
+            <input type="number" name="ageRegisterAdopter" id="ageRegisterAdopter"
+                   class="form-control" placeholder="Edad">
+
+            <label for="hasPetsRegisterAdopter" class="mt-3">¿Tienes otras mascotas?</label>
+            <select name="hasPetsRegisterAdopter" id="hasPetsRegisterAdopter" class="form-control">
+                <option value="">Selecciona una opción</option>
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="petPreferencesRegister" class="mt-3">Preferencias de adopción:</label>
+            <select name="petPreferencesRegister" id="petPreferencesRegister"
+                    class="form-control">
+                <option value="">Selecciona una opción</option>
+                <option value="perro">Perro</option>
+                <option value="gato">Gato</option>
+                <option value="ambos">Perro o gato</option>
+            </select>
+
+            <label for="sizePreferencesRegister" class="mt-3">Tamaño preferido:</label>
+            <select name="sizePreferencesRegister" id="sizePreferencesRegister"
+                    class="form-control">
+                <option value="">Selecciona una opción</option>
+                <option value="pequeno">Pequeño</option>
+                <option value="mediano">Mediano</option>
+                <option value="grande">Grande</option>
+            </select>
+
+            <label for="commentsRegister" class="mt-3">Comentarios adicionales:</label>
+            <textarea name="commentsRegister" id="commentsRegister"
+                      class="form-control" rows="3"
+                      placeholder="Cuéntanos un poco sobre ti y por qué quieres adoptar."></textarea>
+
+            <button type="button" id="buttonRegisterAdopter" class="btn btn-dark mt-4">
+                Registrarse
+            </button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+</html>
