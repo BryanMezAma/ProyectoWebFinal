@@ -4,8 +4,8 @@
 const mongoose = require("mongoose");
 
  
-const petsDB = "mongodb+srv://Ejemplo:ejemplo@cluster0.l7qmfac.mongodb.net/PetsDB";
-const usersDB = "mongodb+srv://Ejemplo:ejemplo@cluster0.l7qmfac.mongodb.net/UsersDB";
+const petsDB = process.env.PETS_DB;//"mongodb+srv://Ejemplo:ejemplo@cluster0.l7qmfac.mongodb.net/PetsDB";
+const usersDB = process.env.USERS_DB;//"mongodb+srv://Ejemplo:ejemplo@cluster0.l7qmfac.mongodb.net/UsersDB";
 
  
 const petsConnection = mongoose.createConnection(petsDB);
